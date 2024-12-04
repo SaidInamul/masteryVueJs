@@ -7,7 +7,9 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
+        <p v-else>Odd: {{ message }}</p>
+        <li v-for="number in listofNumbers">{{ number*2 }}</li>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -17,7 +19,8 @@
         const app = createApp({
             data() {
                 return {
-                    message: 'Hello vue'
+                    message: 'Hello vue!',
+                    listofNumbers: [1,2,3,4,5]
                 }
             },
         })
