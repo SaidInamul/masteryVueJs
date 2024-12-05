@@ -7,6 +7,14 @@
 </head>
 <body>
     <div id="app">
+        <p>{{ count }}</p>
+        <button v-on:click="incrementCount">Increment</button>
+        <label for="incrementAmount">Increment by: </label>
+        <input
+            type="number"
+            v-model="incrementAmount"
+        >
+        <h1>{{ incrementAmount }}</h1>
         <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
         <p v-else>Odd: {{ message }}</p>
         <li v-for="number in listofNumbers">{{ number*2 }}</li>
@@ -20,9 +28,16 @@
             data() {
                 return {
                     message: 'Hello vue!',
-                    listofNumbers: [1,2,3,4,5]
+                    listofNumbers: [1,2,3,4,5],
+                    count: 10,
+                    incrementAmount: 5,
                 }
             },
+            methods: {
+                incrementCount() {
+                    this.count += this.incrementAmount
+                },
+            }
         })
 
         app.mount('#app')
