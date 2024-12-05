@@ -3,23 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favourite Real Madrid Players</title>
+    <title>Real Madrid Players</title>
 </head>
 <body>
 
     <div id="app">
-        <p v-if="playerList.length === 0">No favourite players in Real Madrid</p>
+        <h1>Real Madrid Players</h1>
+        <p v-if="playerList.length === 0">No players in Real Madrid</p>
         <ul v-else>
-            <li v-for="player in playerList">{{ player.name }}</li>
+            <li v-for="player in playerList">
+                <button @click="addFavouritePlayer(player)">⭐️{{ player.name }}</button>
+            </li>
         </ul>
+        <hr>
+        <h1>Real Madrid Favourite Players</h1>
+        <ul v-if="favouritePlayerList.length > 0">
+            <li v-for="favouritePlayer in favouritePlayerList">{{ favouritePlayer.name }}</li>
+        </ul>
+        <p v-else>No favourite player in Real Madrid</p>
+        <h2>Add new player</h2>
+        <input
+            type="text"
+            v-model="newPlayer.name"
+            @keyup.enter="addNewPlayer()"
+        >
     </div>
     
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         Vue.createApp({
             data : () => ({
-                playerList : [{name : 'Ronaldo'},{name : 'Vini Junior'},{name : 'Mbappe'},{name : 'Kaka'}]
-            })
+                playerList : [{name : 'Ronaldo'},{name : 'Vini Junior'},{name : 'Mbappe'},{name : 'Kaka'}],
+                favouritePlayerList : [],
+                newPlayer : {name : ''},
+            }),
+            methods: {
+                addFavouritePlayer(player) {
+                    this.favouritePlayerList.push(player)
+                },
+                addNewPlayer() {
+                    this.playerList.push(this.newPlayer)
+                    this.newPlayer = {name: ''}
+                }
+            }
         }).mount('#app')
     </script>
 </body>
