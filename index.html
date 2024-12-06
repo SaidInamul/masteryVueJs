@@ -27,16 +27,82 @@
             v-model="newPlayer.name"
             @keyup.enter="addNewPlayer()"
         >
+        <hr>
+        <h1>Statistic in Real Madrid Players</h1>
+        <ul>
+            <!-- <li>CF: {{ CFList.length }}</li>
+            <li>LWF: </li>
+            <li>RWF: </li>
+            <li>AMF: </li>
+            <li>LMF: </li>
+            <li>RMF: </li>
+            <li>CMF: </li>
+            <li>CD: </li> -->
+            <li v-for="(stat, position) in positionList">
+                {{ position }} : {{ stat }}
+            </li>
+        </ul>
     </div>
     
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         Vue.createApp({
             data : () => ({
-                playerList : [{name : 'Ronaldo'},{name : 'Vini Junior'},{name : 'Mbappe'},{name : 'Kaka'}],
+                playerList : [
+                                {
+                                    name : 'Ronaldo',
+                                    position : ['CF', 'LWF', 'LMF', 'RWF', 'RMF']
+                                },
+                                {
+                                    name : 'Vini Junior',
+                                    position : ['CF', 'LWF', 'LMF']
+                                },
+                                {
+                                    name : 'Mbappe',
+                                    position : ['CF', 'LWF', 'LMF', 'RWF', 'RMF']
+                                },
+                                {
+                                    name : 'Kaka',
+                                    position : ['LMF', 'RMF', 'AMF', 'CMF']
+                                },
+                                {
+                                    name : 'Ramos',
+                                    position : ['CD']
+                                }],
                 favouritePlayerList : [],
                 newPlayer : {name : ''},
             }),
+            computed: {
+                CFList () {
+                    return this.playerList.filter(
+                        player => player.position.indexOf('CF') > -1
+                    )
+                },
+                positionList () {
+                    const positions = ['CF', 'LWF', 'RWF', 'AMF', 'LMF', 'RMF', 'CMF', 'CD']
+                    const statistics = {
+                        CF: 0,
+                        LWF: 0,
+                        RWF: 0,
+                        LMF: 0,
+                        AMF: 0,
+                        RMF: 0,
+                        CMF: 0,
+                        CD: 0,
+                    }
+
+                    this.playerList.forEach(player => {
+                        positions.forEach(position => {
+                            if (player.position.indexOf(position) > -1) {
+                                statistics[position] += 1
+                            }
+                        })
+                    })
+
+                    return statistics
+                }
+
+            },
             methods: {
                 addFavouritePlayer(player) {
                     this.favouritePlayerList.push(player)
