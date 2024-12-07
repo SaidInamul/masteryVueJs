@@ -33,7 +33,7 @@ export default {
     },
     positionList () {
       const positions = ['CF', 'LWF', 'RWF', 'AMF', 'LMF', 'RMF', 'CMF', 'CD', 'LB', 'RB', 'GK']
-      const statistics = {cas
+      const statistics = {
           CF: 0,
           LWF: 0,
           RWF: 0,
