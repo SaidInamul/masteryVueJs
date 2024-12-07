@@ -47,4 +47,4 @@ computed: {
   <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
   <p v-else>Odd: {{ message }}</p>
   <li v-for="number in listofNumbers">{{ number*2 }}</li>
-</template>
+</template> 
