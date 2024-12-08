@@ -14,16 +14,16 @@ export default {
             type : String,
             required : true,
             default : 'Pizza',
+        },
+        changeName : {
+            type : Function,
+            required : true,
         }
     }
 }
 </script>
 
 <template>
-    <!-- <h1>Name : {{ user.userName }}</h1>
-    <h1>Favourite Food : {{ user.favouriteFood }}</h1> -->
-
-    <h2>Name : {{ name }}</h2>
-    <h2>Food : {{ food }}</h2>
-
+    <h1>Name : {{ name }}</h1>
+    <button @click="changeName">Change Name</button>
 </template>

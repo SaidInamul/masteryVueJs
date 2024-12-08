@@ -18,13 +18,19 @@ export default {
       }
     }
   },
+  methods : {
+    changeName () {
+      this.userDetails.name = 'Inamul'
+    }
+  }
 };
 
 </script>
 
 <template>
   <!-- <userDetails :user="userDetails" /> -->
-   <userDetails />
+  <!-- <userDetails /> -->
+  <userDetails :changeName="changeName" :name="userDetails.name"/>
   <counter />
   <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
   <p v-else>Odd: {{ message }}</p>
