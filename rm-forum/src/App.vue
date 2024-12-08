@@ -1,11 +1,13 @@
 <script>
 import StatisticsPlayer from './components/StatisticsPlayer.vue';
 import FavouritePlayerCard from './components/FavouritePlayerCard.vue';
+import BaseLayout from './components/BaseLayout.vue';
 
 export default {
     components : {
         StatisticsPlayer,
-        FavouritePlayerCard
+        FavouritePlayerCard,
+        BaseLayout
     },
     data : () => ({
         playerList : [
@@ -64,35 +66,40 @@ export default {
     </ul>
     <p v-else>No favourite player in Real Madrid</p>
 
-    <!-- Add new players -->
-    <h2>Add new player</h2>
-    <!-- Input for player's name -->
-    <input
-        type="text"
-        v-model="newPlayer.name"
-        placeholder="Player Name"
-    >
+    <BaseLayout>
+        <template v-slot:two>
+            <!-- Add new players -->
+            <h2>Add new player</h2>
+            <!-- Input for player's name -->
+            <input
+                type="text"
+                v-model="newPlayer.name"
+                placeholder="Player Name"
+            >
 
-    <!-- Multiselect dropdown for positions -->
-    <select v-model="newPlayer.position" multiple>
-        <option value="CF">CF</option>
-        <option value="LWF">LWF</option>
-        <option value="RWF">RWF</option>
-        <option value="AMF">AMF</option>
-        <option value="LMF">LMF</option>
-        <option value="RMF">RMF</option>
-        <option value="CMF">CMF</option>
-        <option value="CD">CD</option>
-        <option value="LB">LB</option>
-        <option value="RB">RB</option>
-        <option value="GK">GK</option>
-    </select>
+            <!-- Multiselect dropdown for positions -->
+            <select v-model="newPlayer.position" multiple>
+                <option value="CF">CF</option>
+                <option value="LWF">LWF</option>
+                <option value="RWF">RWF</option>
+                <option value="AMF">AMF</option>
+                <option value="LMF">LMF</option>
+                <option value="RMF">RMF</option>
+                <option value="CMF">CMF</option>
+                <option value="CD">CD</option>
+                <option value="LB">LB</option>
+                <option value="RB">RB</option>
+                <option value="GK">GK</option>
+            </select>
 
-    <!-- Add player button -->
-    <button @click="addNewPlayer">Add Player</button>
-    <!-- End add new players -->
+            <!-- Add player button -->
+            <button @click="addNewPlayer">Add Player</button>
+            <!-- End add new players -->
+        </template>
+    </BaseLayout>
 
     <hr>
     <!-- Statistic Players -->
     <StatisticsPlayer :players="playerList"/>
+    
 </template>
