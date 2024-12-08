@@ -1,9 +1,11 @@
 <script>
 import StatisticsPlayer from './components/StatisticsPlayer.vue';
+import FavouritePlayerCard from './components/FavouritePlayerCard.vue';
 
 export default {
     components : {
-        StatisticsPlayer
+        StatisticsPlayer,
+        FavouritePlayerCard
     },
     data : () => ({
         playerList : [
@@ -31,8 +33,8 @@ export default {
         newPlayer : {name : '', position : []},
     }),
     methods: {
-        addFavouritePlayer(player) {
-            this.favouritePlayerList.push(player)
+        addFavouritePlayer(payload) {
+            this.favouritePlayerList.push(payload)
         },
         addNewPlayer() {
             // Validate that both name and at least one position are provided
@@ -52,7 +54,7 @@ export default {
     <p v-if="playerList.length === 0">No players in Real Madrid</p>
     <ul v-else>
         <li v-for="player in playerList">
-            <button @click="addFavouritePlayer(player)">⭐️{{ player.name }}</button>
+            <FavouritePlayerCard :player="player" @favourite="addFavouritePlayer"/>
         </li>
     </ul>
     <hr>
