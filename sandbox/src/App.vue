@@ -1,38 +1,31 @@
 <script>
-import counter from './components/counter.vue';
-import userDetails from './components/user-details.vue';
+// https://pokeapi.co/api/v2/pokemon?limit=151
 
 export default {
-  components : {
-    counter, userDetails,
-  },
-  data() {
-    return {
-      message: 'Hello vue!',
-      listofNumbers: [1,2,3,4,5],
-      userDetails : {
-        name : 'Hafiz',
-        title : 'Software Engineer',
-        favouriteFramework : 'VueJs',
-        favouriteFood : 'Fried Chicken',
-      }
-    }
-  },
+  data : () => ({
+    pokedex : [1,2,3]
+  }),
   methods : {
-    changeName () {
-      this.userDetails.name = 'Inamul'
+    async fetchPokemon () {
+      this.pokedex = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151').then(response => response.json())
     }
-  }
-};
+  },
+  beforeCreate () {
+    console.log('Hello')
+    console.log(this.pokedex)
+  },
+  created() {
+    console.log('2nd hello')
+    this.fetchPokemon()
+  },
+}
 
 </script>
 
 <template>
-  <!-- <userDetails :user="userDetails" /> -->
-  <!-- <userDetails /> -->
-  <userDetails :changeName="changeName" :name="userDetails.name"/>
-  <counter />
-  <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
-  <p v-else>Odd: {{ message }}</p>
-  <li v-for="number in listofNumbers">{{ number*2 }}</li>
+  <h1>New app</h1>
+  <pre>
+    {{ pokedex }}
+  </pre>
+  <button @click="fetchPokemon">Fetch pokemon</button>
 </template> 
